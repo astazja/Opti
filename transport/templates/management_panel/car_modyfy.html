@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %} Zarządzanie pojazdami {% endblock %}
+{% block content %}
+    <p>CAR MODYFY</p>
+<form action="{% url 'url_car_modyfy' car.id %}" method="POST">{% csrf_token %}
+    <div class="mt-4 ml-4 mr-4">
+        <div class="row border-bottom border-3">
+            <div class="col"><h3>Edycja pojazdu:</h3></div>
+            {% if error_message %}
+                <div><p class="alert-message">{{ error_message }}</p></div>
+            {% endif %}
+                <div class="col d-flex justify-content-end mb-2">
+                    <button type="submit" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</button>
+                </div>
+        </div>
+
+        <div class="samples-content">
+            <table class="table borderless">
+                <tbody class="text-color-lighter">
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Marka:</th>
+                    <td class="col-7">
+                        <input type="text" name="brand" class="w-100 p-1" value="{{ car.brand }}">
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Model:</th>
+                    <td class="col-7">
+                        <input type="text" name="model" class="w-100 p-1" value="{{ car.model }}">
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Przegląd do:</th>
+                    <td class="col-7">
+                        <input type="date" name="tech_review" class="w-100 p-1" value="{{ car.tech_review }}">
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Wyposażony w lodówkę:</th>
+                    <td class="row-1">
+                        <label>Tak</label>
+                        <input type="radio" name="fridge" class="p-1" value="True"></td>
+                    <td class="row-1">
+                        <label>Nie</label>
+                        <input type="radio" name="fridge" class="p-1" value="False"></td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Opiekun samochodu:</th>
+                    <td class="col-7">
+                        <input type="text" name="couriers_id" class="w-100 p-1" value="{{ car.couriers_id }}">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">
+            <a href="{% url 'url_car_details' car.id %}" >Wróć</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

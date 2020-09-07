@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %} Zarządzanie lokalizacjami {% endblock %}
+{% block content %}
+    <p>LOCATION ADD</p>
+<form action="/location/add/" method="POST">{% csrf_token %}
+    <div class="mt-4 ml-4 mr-4">
+        <div class="row border-bottom border-3">
+            <div class="col"><h3>Dodaj lokalizację:</h3></div>
+            {% if error_message %}
+                <div><p class="alert-message">{{ error_message }}</p></div>
+            {% endif %}
+                <div class="col d-flex justify-content-end mb-2">
+                    <button type="submit" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</button>
+                </div>
+        </div>
+
+        <div class="samples-content">
+            <table class="table borderless">
+                <tbody class="text-color-lighter">
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Adres:</th>
+                    <td class="col-7">
+                        <input type="text" name="address" class="w-100 p-1">
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Jednostka:</th>
+                    <td class="col-7">
+                        <select name="place">
+                            {% for item in places %}
+                                <option value="{{item.0}}">{{ item.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Dni pracy:</th>
+                    <td class="col-7">
+                        <select name="pickup_day">
+                            {% for item in days %}
+                                <option value="{{item.0}}">{{ item.1 }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Godziny pracy:</th>
+                    <td class="col-7">
+                        <select name="pickup_time">
+                            {% for item in hours %}
+                                 <option value="{{item.0}}">{{ item.1 }}</option>
+                             {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">
+            <a href="{% url 'url_locations_management' %}" >Wróć</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

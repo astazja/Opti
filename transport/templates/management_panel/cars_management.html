@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %} Zarządzanie pojazdami {% endblock %}
+{% block content %}
+    <p>CAR MANAGEMENT</p>
+    <div class="mt-4 ml-4 mr-4">
+        <div class="row border-bottom border-3">
+            <div class="col"><h3>Lista pojazdów: </h3></div>
+            <div class="col d-flex justify-content mb-2">
+                <a href="{% url 'url_car_add' %}" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj pojazd</a>
+            </div>
+        </div>
+
+        <div class="samples-content">
+            <table class="table border-bottom">
+                <thead>
+                <tr class="d-flex">
+                    <th scope="col" class="col-1">ID</th>
+                    <th scope="col" class="col-3">MARKA</th>
+                    <th scope="col" class="col-3">MODEL</th>
+                    <th scope="col" class="col-3">AKCJE</th>
+                </tr>
+                </thead>
+                    <tbody class="text-color-lighter">
+                    {% for car in cars_pag %}
+                    <tr class="d-flex">
+                        <td scope="row" class="col-1">{{ car.id }}</td>
+                        <td class="col-3">{{ car.brand }}</td>
+                        <td class="col-3">{{ car.model }}</td>
+                        <td class="col-3 d-flex align-items-center justify-content-center flex-wrap">
+                            <div class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">
+                                <a href="{% url 'url_car_details' car.id %}" >Szczegóły</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+        <div class="paginator">
+            <span class="step-links">
+                {% if cars_pag.has_previous %}
+                    <a href="?page={{ cars_pag.previous_page_number }}"> &laquo; poprzednia</a>
+                {% endif %}
+                    <span class="current">
+                        {% for num in cars_pag.paginator.page_range %}
+                            {% if cars_pag.number == num %}
+                            <strong>{{ num }}</strong>|
+                            {% else %}
+                                {{ num }}|
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                {% if cars_pag.has_next %}
+                    <a href="?page={{ cars_pag.next_page_number }}">następna &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        <div class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">
+            <a href="{% url 'url_managment' %}">Wróć</a>
+        </div>
+    </div>
+{% endblock content %}

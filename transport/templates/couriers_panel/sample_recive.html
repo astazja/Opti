@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} Odbiór materiału {% endblock %}
+{% block content %}
+<form action="{% url 'url_sample_recive' %}" method="POST">{% csrf_token %}
+    <div class="mt-4 ml-4 mr-4">
+        <div class="row border-bottom border-3">
+            <div><h3>Odbiór próbki: </h3></div>
+            <div class="col d-flex justify-content-end mb-2">
+                <a href="" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Skanuj</a>
+            </div>
+        </div>
+        <div class="samples-content">
+            <table class="table borderless">
+                <tbody class="text-color-lighter">
+                <tr class="d-flex">
+                    <th scope="row" class="col-5">KOD KRESKOWY PRÓBKI:</th>
+                    <td class="col-7">
+                        <input type="text" name="barcode" class="w-100 p-1">
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-5">MIEJSCE DOSTARCZENIA:</th>
+                    <td class="col-7">
+                        <select name="delivery_place_id">
+                            {% for location in locations %}
+                                <option value="{{location.id}}">{{ location.address }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-5">MIEJSCE ODBIORU PRÓBKI:</th>
+                    <td class="col-7">
+                        <select name="sampling_place_id">
+                            {% for location in locations %}
+                                <option value="{{location.id}}">{{ location.address }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text border-solid">
+            <button type="submit" class="border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</button>
+        </div>
+        <div class="text border-solid">
+            <a href="{% url 'url_courier' %}">Wróć</a>
+        </div>
+    </div>
+</form>
+{% endblock content %}

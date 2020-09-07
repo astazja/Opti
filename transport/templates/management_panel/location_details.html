@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %} Zarządzanie lokalizacjami {% endblock %}
+{% block content %}
+    <p>LOCATION DETAILS</p>
+    <div class="mt-4 ml-4 mr-4">
+        <div class="row border-bottom border-3">
+            <div class="col"><h3>Dane lokalizacji:</h3></div>
+                <div class="col d-flex justify-content-end mb-2">
+                    <a href="" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Usuń</a>
+                </div>
+                <div class="col d-flex justify-content mb-2">
+                    <a href="{% url 'url_location_modyfy' location.id %}" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Edycja</a>
+                </div>
+        </div>
+
+        <div class="samples-content">
+            <table class="table borderless">
+                <tbody class="text-color-lighter">
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">ID lokalizacji:</th>
+                    <td class="col-7">{{ location.id }}</td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Adres:</th>
+                    <td class="col-7">{{ location.address }}</td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Jednostka:</th>
+                    {% for item in place %}
+                        {% if location.place == item.0 %}
+                            <td class="col-7">{{ item.1 }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Dni pracy:</th>
+                    {% for item in day %}
+                        {% if location.pickup_day == item.0 %}
+                            <td class="col-7">{{ item.1 }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Godziny pracy:</th>
+                    {% for item in hours %}
+                        {% if location.pickup_time == item.0 %}
+                            <td class="col-7">{{ item.1 }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">
+            <a href="{% url 'url_locations_management' %}" >Wróć</a>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %} Zarządzanie kierowcami {% endblock %}
+{% block content %}
+    <p>DRIVER DETAILS</p>
+    <div class="mt-4 ml-4 mr-4">
+        <div class="row border-bottom border-3">
+            <div class="col"><h3>Dane kierowcy:</h3></div>
+            <div class="col d-flex justify-content-end mb-2">
+                <a href="" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Usuń</a>
+            </div>
+            <div class="col d-flex justify-content mb-2">
+                <a href="{% url 'url_driver_modyfy' driver.id %}" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Edycja</a>
+            </div>
+        </div>
+
+        <div class="samples-content">
+            <table class="table borderless">
+                <tbody class="text-color-lighter">
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">ID kierowcy:</th>
+                    <td class="col-7">{{ driver.id }}</td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Imię:</th>
+                    <td class="col-7">{{ driver.name }}</td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Nazwisko:</th>
+                    <td class="col-7">{{ driver.surname }}</td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Identyfikator:</th>
+                    <td class="col-7">{{ driver.courier_id }}</td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Prowadzony ostatnio pojazd:</th>
+                    <td class="col-7">{ostatni pojazd}</td>
+                </tr>
+                <tr class="d-flex">
+                    <th scope="row" class="col-3">Prowadzone pojazdy:</th>
+                    <td class="col-7">{lista wszystkich pojazdów}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">
+            <a href="{% url 'url_drivers_management' %}" >Wróć</a>
+        </div>
+    </div>
+{% endblock content %}

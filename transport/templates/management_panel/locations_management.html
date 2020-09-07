@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %} Zarządzanie lokalizacjami {% endblock %}
+{% block content %}
+    <p>LOCATION MANAGEMENT</p>
+    <div class="mt-4 ml-4 mr-4">
+        <div class="row border-bottom border-3">
+            <div class="col"><h3>Lista punktów:</h3></div>
+            <div class="col d-flex justify-content mb-2">
+                <a href="{% url 'url_location_add' %}" class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj punkt</a>
+            </div>
+        </div>
+
+        <div class="samples-content">
+            <table class="table border-bottom">
+                <thead>
+                <tr class="d-flex">
+                    <th scope="col" class="col-1">ID</th>
+                    <th scope="col" class="col-3">OBIEKT</th>
+                    <th scope="col" class="col-3">ADRES</th>
+                    <th scope="col" class="col-3">AKCJE</th>
+                </tr>
+                </thead>
+                    <tbody class="text-color-lighter">
+                    {% for location in locations_pag %}
+                    <tr class="d-flex">
+                        <td scope="row" class="col-1">{{ location.id }}</td>
+                        {% for place in places %}
+                            {% if place.0 == location.place %}
+                                <td class="col-3">{{ place.1 }}</td>
+                            {% endif %}
+                        {% endfor %}
+                        <td class="col-3">{{ location.address }}</td>
+                        <td class="col-3 d-flex align-items-center justify-content-center flex-wrap">
+                            <div class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">
+                                <a href="{% url 'url_location_details' location.id %}">Szczegół</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+        <div class="paginator">
+            <span class="step-links">
+                {% if locations_pag.has_previous %}
+                    <a href="?page={{ locations_pag.previous_page_number }}"> &laquo; poprzednia</a>
+                {% endif %}
+                    <span class="current">
+                        {% for num in locations_pag.paginator.page_range %}
+                            {% if locations_pag.number == num %}
+                            <strong>{{ num }}</strong>|
+                            {% else %}
+                                {{ num }}|
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                {% if locations_pag.has_next %}
+                    <a href="?page={{ locations_pag.next_page_number }}">następna &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        <div class="text border-solid rounded-0 pt-0 pb-0 pr-4 pl-4">
+            <a href="{% url 'url_managment' %}">Wróć</a>
+        </div>
+    </div>
+{% endblock content %}

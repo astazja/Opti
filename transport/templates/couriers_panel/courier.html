@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} Panel kierowcy {% endblock %}
+{% block content %}
+<div class="mt-4 ml-4 mr-4">
+    <div class="text border-solid">
+        <a href="{% url 'url_sample_recive' %}">Odbiór próbki</a>
+    </div>
+    <div class="text border-solid">
+        <a href="{% url 'url_sample_delivery' %}">Przekaż próbki</a>
+    </div>
+    <div class="text border-solid">
+        <a href="{% url 'url_sample_list' %}">Lista próbek w transporcie</a>
+    </div>
+    <div class="mt-4 ml-4 mr-4">
+        <div class="row border-bottom border-3 ">
+            <div class="col"><h3>Dane prowadzonego pojazdu:</h3></div>
+        </div>
+        <div class="samples-content">
+            <table class="table borderless">
+                <tbody class="text-color-lighter">
+                    <tr class="d-flex">
+                        <th scope="row" class="col-3">ID pojazdu:</th>
+                        <td class="col-7">{{ car.id }}</td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th scope="row" class="col-3">Marka:</th>
+                        <td class="col-7">{{ car.brand }}</td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th scope="row" class="col-3">Model:</th>
+                        <td class="col-7">{{ car.model }}</td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th scope="row" class="col-3">Przegląd do:</th>
+                        <td class="col-7">{{ car.tech_review }}</td>
+                    </tr>
+                    <tr class="d-flex">
+                        <th scope="row" class="col-3">Wyposażony w lodówkę:</th>
+                        <td class="col-7">{{ confirm }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="text border-solid">
+        <a href="{% url 'url_landing_page' %}">Wróć</a>
+    </div>
+    <div class="text border-solid">
+        Wyloguj
+    </div>
+</div>
+{% endblock content %}

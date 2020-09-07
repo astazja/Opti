@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} Zarządzanie {% endblock %}
+{% block content %}
+    <p>RAPORT:</p>
+    <div class="text border-solid">
+        <a href="{% url 'url_drivers_management' %}" >Zarządzanie kierowcami</a>
+    </div>
+    <div class="text border-solid">
+        <a href="{% url 'url_locations_management' %}">Zarządznie lokalizacjami</a>
+    </div>
+    <div class="text border-solid">
+        <a href="{% url 'url_cars_management' %}">Zarządzanie pojazdami</a>
+    </div>
+    <div class="text border-solid">
+        <a href="{% url 'url_landing_page' %}">Wróć</a>
+    </div>
+    <div class="text border-solid">
+    Wyloguj
+    </div>
+{% endblock content %}
